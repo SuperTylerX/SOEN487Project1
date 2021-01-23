@@ -1,4 +1,7 @@
+package model;
+
 public class Album {
+
     private String ISRC;
     private String title;
     private String description;
@@ -11,6 +14,18 @@ public class Album {
         this.description = description;
         this.year = year;
         this.artist = artist;
+    }
+
+    public Album(Album album) {
+        this.ISRC = album.ISRC;
+        this.title = album.title;
+        this.description = album.description;
+        this.year = album.year;
+        this.artist = album.artist;
+    }
+
+    public Album clone() {
+        return new Album(this);
     }
 
     public String getISRC() {
@@ -55,7 +70,7 @@ public class Album {
 
     @Override
     public String toString() {
-        return "Album{" +
+        return "model.Album{" +
                 "ISRC='" + ISRC + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +

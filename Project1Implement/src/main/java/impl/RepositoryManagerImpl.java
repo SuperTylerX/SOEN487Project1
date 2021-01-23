@@ -1,3 +1,8 @@
+package impl;
+
+import interfacedef.*;
+import model.*;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -11,10 +16,12 @@ public class RepositoryManagerImpl implements RepositoryManager {
         return single_instance;
     }
 
+    @Override
     public void addArtist(Artist artist) {
         artists.add(artist);
     }
 
+    @Override
     public boolean removeArtist(String nickname) {
         for (int i = 0; i < artists.size(); i++) {
             if (artists.get(i).getNickname().equals(nickname)) {
@@ -25,17 +32,55 @@ public class RepositoryManagerImpl implements RepositoryManager {
         return false;
     }
 
+    @Override
     public Artist getArtist(String nickname) {
-        for (int i = 0; i < artists.size(); i++) {
-            if (artists.get(i).getNickname().equals(nickname)) {
-                return artists.get(i);
+        for (Artist artist : artists) {
+            if (artist.getNickname().equals(nickname)) {
+                return artist.clone();
             }
         }
         return null;
     }
 
+    @Override
     public List<Artist> getArtists() {
+        // TODO:
+        return null;
+    }
 
+    @Override
+    public boolean updateArtist(Artist artist) {
+        // TODO:
+        return true;
+    }
+
+    @Override
+    public void addAlbum(Album album) {
+        // TODO:
+    }
+
+    @Override
+    public boolean removeAlbum(String isrc) {
+        // TODO:
+        return false;
+    }
+
+    @Override
+    public Artist getAlbum(String isrc) {
+        // TODO:
+        return null;
+    }
+
+    @Override
+    public List<Artist> getAlbums() {
+        // TODO:
+        return null;
+    }
+
+    @Override
+    public boolean updateAlbum(Album album) {
+        // TODO:
+        return true;
     }
 
 }

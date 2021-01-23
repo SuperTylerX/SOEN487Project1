@@ -1,6 +1,9 @@
-import java.util.ArrayList;
+package interfacedef;
+
+import model.Album;
+import model.Artist;
+
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public interface RepositoryManager {
 
@@ -12,7 +15,7 @@ public interface RepositoryManager {
 
     public List<Artist> getArtists();
 
-    public void updateArtist(Artist artist);
+    public boolean updateArtist(Artist artist);
 
 
     public void addAlbum(Album album);
@@ -23,6 +26,6 @@ public interface RepositoryManager {
 
     public List<Artist> getAlbums();
 
-    public void updateAlbum(Album album);
+    public boolean updateAlbum(Album album);
 
 }
