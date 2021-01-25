@@ -7,25 +7,25 @@ import java.util.List;
 
 public interface RepositoryManager {
 
-    public void addArtist(Artist artist);
+    void addArtist(Artist artist);
 
-    public boolean removeArtist(String nickname);
+    boolean removeArtist(String nickname);
 
-    public Artist getArtist(String nickname);
+    Artist getArtist(String nickname);
 
-    public List<Artist> getArtists();
+    List<Artist> getArtists();
 
-    public boolean updateArtist(Artist artist);
+    boolean updateArtist(Artist artist);
 
 
-    public void addAlbum(Album album);
+    void addAlbum(Album album);
 
-    public boolean removeAlbum(String isrc);
+    boolean removeAlbum(String isrc);
 
-    public Artist getAlbum(String isrc);
+    Album getAlbum(String isrc);
 
-    public List<Artist> getAlbums();
+    List<Album> getAlbums();
 
-    public boolean updateAlbum(Album album);
+    boolean updateAlbum(Album album);
 
 }
