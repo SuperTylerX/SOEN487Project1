@@ -1,121 +1,139 @@
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.message.BufferedHeader;
-import org.apache.http.util.EntityUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        ClientFunction cf = new ClientFunction();
+        Scanner sc = new Scanner(System.in);
+        int num = 0;
+        while (num != -1) {
+            System.out.println("Please input an integer for different item: -1 to quit the client");
+            System.out.println("1 for Create new artist");
+            System.out.println("2 for Get artists");
+            System.out.println("3 for Update artist");
+            System.out.println("4 for Delete artist");
+            System.out.println("5 for Get all albums");
+            System.out.println("6 for Get albums by isrc");
+            System.out.println("7 for Create new album");
+            System.out.println("8 for update album");
+            System.out.println("9 for delete album");
 
-
-    }
-
-    private void sendGet() throws Exception {
-        HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet("\"http://www.google.com/");
-        request.addHeader("User-Agent", "Mozilla/5.0");
-        HttpResponse response = client.execute(request);
-        System.out.println("Sending 'GET' request to URL");
-        System.out.println("Response Code: " + response.getStatusLine().getStatusCode());
-        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-        StringBuilder result = new StringBuilder();
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
-        }
-        System.out.println(result.toString());
-    }
-
-
-    private void sendPost() throws Exception {
-        HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost("http://asdasdasd");
-        post.setHeader("User-Agent", "Mozilla/5.0");
-
-        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("sn", "C02bin2345"));
-        urlParameters.add(new BasicNameValuePair("sn", "C02bin2345"));
-        urlParameters.add(new BasicNameValuePair("sn", "C02bin2345"));
-        urlParameters.add(new BasicNameValuePair("sn", "C02bin2345"));
-
-        post.setEntity(new UrlEncodedFormEntity(urlParameters));
-        HttpResponse response = client.execute(post);
-        System.out.println("Sending 'POST' request to URL");
-        System.out.println("Post parameters: " + post.getEntity());
-        System.out.println("Response Code: " + response.getStatusLine().getStatusCode());
-        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-        StringBuilder result = new StringBuilder();
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
-        }
-        System.out.println(result.toString());
-
-    }
-
-    private void sendPUT() throws Exception {
-        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-            HttpPut httpPut = new HttpPut("http://httpbin.org/put");
-
-            httpPut.setEntity(new StringEntity("Hello, World"));
-
-            System.out.println("Executing PUT request " + httpPut.getRequestLine());
-
-            // Create a custom response handler
-            ResponseHandler<String> responseHandler = response -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Unexpected response status: " + status);
+            num = sc.nextInt();
+            if (num == 1) {//1 for Create new artist
+                System.out.println("1.Create new artist. Please input some info");
+                System.out.println("Firstname: ");
+                String firstname = sc.nextLine();
+                System.out.println("Lastname: ");
+                String lastname = sc.nextLine();
+                System.out.println("Nickname: ");
+                String nickname = sc.nextLine();
+                System.out.println("Bio: ");
+                String bio = sc.nextLine();
+                try {
+                    cf.create_new_artist(nickname, firstname, lastname, bio);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            };
-            String responseBody = httpclient.execute(httpPut, responseHandler);
-//            System.out.println("----------------------------------------");
-            System.out.println(responseBody);
-        }
-    }
-
-    private void sendDelete() throws Exception {
-        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-            HttpDelete httpDelete = new HttpDelete("http://httpbin.org/delete");
-
-            System.out.println("Executing request " + httpDelete.getRequestLine());
-
-            // Create a custom response handler
-            ResponseHandler<String> responseHandler = response -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Unexpected response status: " + status);
+            } else if (num == 2) {//2 for Get artists by nickname
+                System.out.println("2 for Get artists by nickname");
+                System.out.println("Nickname: ");
+                String nickname = sc.nextLine();
+                try {
+                    cf.get_artist_by_nickname(nickname);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            };
-            String responseBody = httpclient.execute(httpDelete, responseHandler);
-//            System.out.println("----------------------------------------");
-            System.out.println(responseBody);
+            } else if (num == 3) {//3 for Update artist
+                System.out.println("3.Update artist. Please input some info");
+                System.out.println("Firstname: ");
+                String firstname = sc.nextLine();
+                System.out.println("Lastname: ");
+                String lastname = sc.nextLine();
+                System.out.println("Nickname: ");
+                String nickname = sc.nextLine();
+                System.out.println("Bio: ");
+                String bio = sc.nextLine();
+                try {
+                    cf.update_artist(nickname, firstname, lastname, bio);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (num == 4) {//4 for Delete artist
+                System.out.println("4 for delete artists by nickname");
+                System.out.println("Nickname: ");
+                String nickname = sc.nextLine();
+                try {
+                    cf.del_artist_by_nickname(nickname);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (num == 5) {//5 for Get all albums
+                try {
+                    cf.get_all_albums();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (num == 6) {//6 for Get albums by isrc
+                System.out.println("6 for Get albums by isrc:");
+                System.out.println("isrc: ");
+                String isrc = sc.nextLine();
+                try {
+                    cf.get_album_by_isrc(isrc);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (num == 7) {//7 for Create new album
+                System.out.println("7 for Create new album. Please input some info");
+                System.out.println("isrc: ");
+                String isrc = sc.nextLine();
+                System.out.println("title: ");
+                String title = sc.nextLine();
+                System.out.println("description: ");
+                String description = sc.nextLine();
+                System.out.println("artist: ");
+                String artist = sc.nextLine();
+                System.out.println("Year: ");
+                int year = sc.nextInt();
+                try {
+                    cf.create_new_album(isrc, title, description, artist, year);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (num == 8) {//8 for update album
+                System.out.println("8 for update album. Please input some info");
+                System.out.println("isrc: ");
+                String isrc = sc.nextLine();
+                System.out.println("title: ");
+                String title = sc.nextLine();
+                System.out.println("description: ");
+                String description = sc.nextLine();
+                System.out.println("artist: ");
+                String artist = sc.nextLine();
+                System.out.println("Year: ");
+                int year = sc.nextInt();
+                try {
+                    cf.update_album(isrc, title, description, artist, year);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (num == 9) {//9 for delete album
+                System.out.println("9 for delete album by isrc:");
+                System.out.println("isrc: ");
+                String isrc = sc.nextLine();
+                try {
+                    cf.del_album_by_isrc(isrc);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
         }
+        System.out.println("quit the client, thank you");
+
     }
 
 
