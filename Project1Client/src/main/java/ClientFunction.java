@@ -22,12 +22,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientFunction {
-    public static final String SERVLET_URL = "http://localhost/servlet.ArtistController/";
+    public static final String TOMCAT_SERVLET_URL = "http://localhost:8081/Project1Service_war/artists/";
+    public static final String SERVLET_URL="http://localhost:8080/service/album/";
+    //get
+    public void get_all_artist() throws Exception {
+        HttpClient client = new DefaultHttpClient();
+        HttpGet request = new HttpGet(TOMCAT_SERVLET_URL);
+        request.addHeader("User-Agent", "Mozilla/5.0");
+        HttpResponse response = client.execute(request);
+        System.out.println("Sending 'GET' request to URL");
+        System.out.println("Response Code: " + response.getStatusLine().getStatusCode());
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        StringBuilder result = new StringBuilder();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        System.out.println(result.toString());
+    }
 
     //get
     public void get_artist_by_nickname(String nickname) throws Exception {
         HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(SERVLET_URL + "nickname=" + nickname);
+        HttpGet request = new HttpGet(TOMCAT_SERVLET_URL + "nickname=" + nickname);
         request.addHeader("User-Agent", "Mozilla/5.0");
         HttpResponse response = client.execute(request);
         System.out.println("Sending 'GET' request to URL");
@@ -44,7 +61,7 @@ public class ClientFunction {
     //post
     public void create_new_artist(String nickname, String firstname, String lastname, String bio) throws Exception {
         HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(SERVLET_URL);
+        HttpPost post = new HttpPost(TOMCAT_SERVLET_URL);
         post.setHeader("User-Agent", "Mozilla/5.0");
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("nickname", nickname));
@@ -70,7 +87,7 @@ public class ClientFunction {
     //put
     public void update_artist(String nickname, String firstname, String lastname, String bio) throws Exception {
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-            HttpPut httpPut = new HttpPut(SERVLET_URL);
+            HttpPut httpPut = new HttpPut(TOMCAT_SERVLET_URL);
 
             List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
             urlParameters.add(new BasicNameValuePair("nickname", nickname));
@@ -100,11 +117,8 @@ public class ClientFunction {
     //delete
     public void del_artist_by_nickname(String nickname) throws Exception {
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-            HttpDelete httpDelete = new HttpDelete(SERVLET_URL + nickname);
-
-
+            HttpDelete httpDelete = new HttpDelete(TOMCAT_SERVLET_URL + nickname);
             System.out.println("Executing request " + httpDelete.getRequestLine());
-
             // Create a custom response handler
             ResponseHandler<String> responseHandler = response -> {
                 int status = response.getStatusLine().getStatusCode();
@@ -124,7 +138,7 @@ public class ClientFunction {
     //get
     public void get_all_albums() throws Exception {
         HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(SERVLET_URL + "album");
+        HttpGet request = new HttpGet(SERVLET_URL);
         request.addHeader("User-Agent", "Mozilla/5.0");
         HttpResponse response = client.execute(request);
         System.out.println("Sending 'GET' request to URL");
@@ -141,7 +155,7 @@ public class ClientFunction {
     //get
     public void get_album_by_isrc(String isrc) throws Exception {
         HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(SERVLET_URL + "album/" + isrc);
+        HttpGet request = new HttpGet(SERVLET_URL + isrc);
         request.addHeader("User-Agent", "Mozilla/5.0");
         HttpResponse response = client.execute(request);
         System.out.println("Sending 'GET' request to URL");

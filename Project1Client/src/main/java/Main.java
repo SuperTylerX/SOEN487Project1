@@ -8,8 +8,9 @@ public class Main {
         int num = 0;
         while (num != -1) {
             System.out.println("Please input an integer for different item: -1 to quit the client");
+            System.out.println("0 for Get all artists");
             System.out.println("1 for Create new artist");
-            System.out.println("2 for Get artists");
+            System.out.println("2 for Get artists by nickname");
             System.out.println("3 for Update artist");
             System.out.println("4 for Delete artist");
             System.out.println("5 for Get all albums");
@@ -17,9 +18,15 @@ public class Main {
             System.out.println("7 for Create new album");
             System.out.println("8 for update album");
             System.out.println("9 for delete album");
-
             num = sc.nextInt();
-            if (num == 1) {//1 for Create new artist
+
+            if (num == 0) {
+                try {
+                    cf.get_all_artist();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (num == 1) {//1 for Create new artist
                 System.out.println("1.Create new artist. Please input some info");
                 System.out.println("Firstname: ");
                 String firstname = sc.nextLine();
@@ -129,12 +136,7 @@ public class Main {
                     e.printStackTrace();
                 }
             }
-
-
         }
         System.out.println("quit the client, thank you");
-
     }
-
-
 }
