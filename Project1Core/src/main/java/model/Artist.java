@@ -59,11 +59,18 @@ public class Artist {
 
     @Override
     public String toString() {
-        return "model.Artist{" +
+        return "Artist{" +
                 "nickname='" + nickname + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", bio='" + bio + '\'' +
-                '}';
+                '}' + "\r\n";
     }
+
+    public String printName() {
+        return "Artist{ nickname = '" + nickname + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastname='" + lastname + '\'' + "}\r\n";
+    }
+
 }

@@ -70,12 +70,18 @@ public class Album {
 
     @Override
     public String toString() {
-        return "model.Album{" +
+        return "Album{" +
                 "ISRC='" + ISRC + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", year=" + year +
                 ", artist='" + artist + '\'' +
-                '}';
+                '}' + "\r\n";
+    }
+
+    public String printTitle() {
+        return "Album {" +
+                "ISRC='" + ISRC + '\'' +
+                ", title='" + title + '\'' + "}\r\n";
     }
 }

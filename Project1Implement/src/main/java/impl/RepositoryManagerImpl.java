@@ -44,7 +44,7 @@ public class RepositoryManagerImpl implements RepositoryManager {
 
     @Override
     public List<Artist> getArtists() {
-        return artists;
+        return (CopyOnWriteArrayList) ((CopyOnWriteArrayList) artists).clone();
     }
 
     @Override
@@ -88,7 +88,7 @@ public class RepositoryManagerImpl implements RepositoryManager {
 
     @Override
     public List<Album> getAlbums() {
-        return albums;
+        return (CopyOnWriteArrayList) ((CopyOnWriteArrayList) albums).clone();
     }
 
     @Override

@@ -50,7 +50,7 @@ public class ArtistController extends HttpServlet {
         String nickname = request.getParameter("nickname");
         if (nickname == null) {
             //list all the artists
-            String output = manager.getArtists().stream().map(Objects::toString).collect(Collectors.joining(".\n"));
+            String output = manager.getArtists().stream().map(Artist::printName).collect(Collectors.joining("\r\n"));
             pw.println(output);
         } else {
             // find the artist
@@ -94,16 +94,7 @@ public class ArtistController extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter pw = response.getWriter();
         RepositoryManager manager = RepositoryManagerImpl.getInstance();
-        String body = getBodyString(request);
-        String[] pairs = body.split("&");
-        HashMap<String, String> postInfoMap = new HashMap<>();
-        for (String pair : pairs) {
-            String[] fields = pair.split("=");
-            postInfoMap.put(fields[0], URLDecoder.decode(fields[1], "UTF-8"));
-        }
-
-        String nickname = postInfoMap.get("nickname");
-
+        String nickname = request.getParameter("nickname");
         boolean flag = manager.removeArtist(nickname);
         if (flag) {
             pw.println("Artist deleted successfully!");

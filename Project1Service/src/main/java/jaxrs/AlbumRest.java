@@ -17,7 +17,7 @@ public class AlbumRest {
     @Produces(MediaType.TEXT_PLAIN)
     public String getAlbums() {
         RepositoryManager manager = RepositoryManagerImpl.getInstance();
-        return manager.getAlbums().stream().map(Objects::toString).collect(Collectors.joining(".\n"));
+        return manager.getAlbums().stream().map(Album::printTitle).collect(Collectors.joining("\\r\\n"));
     }
 
 
@@ -26,7 +26,11 @@ public class AlbumRest {
     @Produces(MediaType.TEXT_PLAIN)
     public String getAlbum(@PathParam("isrc") String isrc) {
         RepositoryManager manager = RepositoryManagerImpl.getInstance();
-        return manager.getAlbum(isrc).toString();
+        if (manager.getAlbum(isrc) != null) {
+            return manager.getAlbum(isrc).toString();
+        } else {
+            return "No album found!";
+        }
     }
 
 
