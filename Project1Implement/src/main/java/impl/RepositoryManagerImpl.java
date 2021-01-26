@@ -44,43 +44,65 @@ public class RepositoryManagerImpl implements RepositoryManager {
 
     @Override
     public List<Artist> getArtists() {
-        // TODO:
-        return null;
+        return artists;
     }
 
     @Override
     public boolean updateArtist(Artist artist) {
-        // TODO:
-        return true;
-    }
-
-    @Override
-    public void addAlbum(Album album) {
-        // TODO:
-    }
-
-    @Override
-    public boolean removeAlbum(String isrc) {
-        // TODO:
+        for (Artist a : artists) {
+            if (a.getNickname().equals(artist.getNickname())) {
+                a.setFirstName(artist.getFirstName());
+                a.setLastname(artist.getLastname());
+                a.setBio(artist.getBio());
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public Artist getAlbum(String isrc) {
-        // TODO:
+    public void addAlbum(Album album) {
+        albums.add(album);
+    }
+
+    @Override
+    public boolean removeAlbum(String isrc) {
+        for (int i = 0; i < albums.size(); i++) {
+            if (albums.get(i).getISRC().equals(isrc)) {
+                albums.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Album getAlbum(String isrc) {
+        for (Album album : albums) {
+            if (album.getISRC().equals(isrc)) {
+                return album.clone();
+            }
+        }
         return null;
     }
 
     @Override
-    public List<Artist> getAlbums() {
-        // TODO:
-        return null;
+    public List<Album> getAlbums() {
+        return albums;
     }
 
     @Override
     public boolean updateAlbum(Album album) {
-        // TODO:
-        return true;
+        for (Album a : albums) {
+            if (a.getISRC().equals(album.getISRC())) {
+                a.setArtist(album.getArtist());
+                a.setDescription(album.getDescription());
+                a.setTitle(album.getTitle());
+                a.setYear(album.getYear());
+                return true;
+            }
+        }
+        return false;
     }
 
 }
