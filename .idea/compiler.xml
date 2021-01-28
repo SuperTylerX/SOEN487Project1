@@ -13,7 +13,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Project1Client" target="1.8" />
+      <module name="Project1Client" target="8" />
       <module name="Project1Core" target="1.8" />
       <module name="Project1Implement" target="7" />
       <module name="Project1Service" target="1.8" />

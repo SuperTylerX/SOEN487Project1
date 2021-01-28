@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ClientFunction cf = new ClientFunction();
+        AlbumClient albumClient = new AlbumClient();
+        ArtistClient artistClient=new ArtistClient();
         Scanner sc = new Scanner(System.in);
         int num = 0;
         while (num != -1) {
@@ -22,7 +23,7 @@ public class Main {
 
             if (num == 0) {
                 try {
-                    cf.get_all_artist();
+                    artistClient.get_all_artist();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -37,7 +38,7 @@ public class Main {
                 System.out.print("Bio: ");
                 String bio = new Scanner(System.in).nextLine();
                 try {
-                    cf.create_new_artist(nickname, firstname, lastname, bio);
+                    artistClient.create_new_artist(nickname, firstname, lastname, bio);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -46,7 +47,7 @@ public class Main {
                 System.out.print("Nickname: ");
                 String nickname = new Scanner(System.in).nextLine();
                 try {
-                    cf.get_artist_by_nickname(nickname);
+                    artistClient.get_artist_by_nickname(nickname);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -61,7 +62,7 @@ public class Main {
                 System.out.print("Bio: ");
                 String bio = new Scanner(System.in).nextLine();
                 try {
-                    cf.update_artist(nickname, firstname, lastname, bio);
+                    artistClient.update_artist(nickname, firstname, lastname, bio);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -71,14 +72,14 @@ public class Main {
                 System.out.print("Nickname: ");
                 String nickname = new Scanner(System.in).nextLine();
                 try {
-                    cf.del_artist_by_nickname(nickname);
+                    artistClient.del_artist_by_nickname(nickname);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
             } else if (num == 5) {//5 for Get all albums
                 try {
-                    cf.get_all_albums();
+                    albumClient.get_all_albums();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -87,7 +88,7 @@ public class Main {
                 System.out.print("isrc: ");
                 String isrc = new Scanner(System.in).nextLine();
                 try {
-                    cf.get_album_by_isrc(isrc);
+                    albumClient.get_album_by_isrc(isrc);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -104,7 +105,7 @@ public class Main {
                 System.out.print("Year: ");
                 int year = sc.nextInt();
                 try {
-                    cf.create_new_album(isrc, title, description, artist, year);
+                    albumClient.create_new_album(isrc, title, description, artist, year);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -122,7 +123,7 @@ public class Main {
                 System.out.print("Year: ");
                 int year = sc.nextInt();
                 try {
-                    cf.update_album(isrc, title, description, artist, year);
+                    albumClient.update_album(isrc, title, description, artist, year);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -131,7 +132,7 @@ public class Main {
                 System.out.print("isrc: ");
                 String isrc = new Scanner(System.in).nextLine();
                 try {
-                    cf.del_album_by_isrc(isrc);
+                    albumClient.del_album_by_isrc(isrc);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
