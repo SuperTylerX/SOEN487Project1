@@ -76,12 +76,12 @@ public class Album {
                 ", description='" + description + '\'' +
                 ", year=" + year +
                 ", artist='" + artist + '\'' +
-                '}' + "\r\n";
+                '}';
     }
 
     public String printTitle() {
         return "Album {" +
                 "ISRC='" + ISRC + '\'' +
-                ", title='" + title + '\'' + "}\r\n";
+                ", title='" + title + '\'' + "}";
     }
 }

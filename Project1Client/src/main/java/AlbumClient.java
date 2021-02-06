@@ -36,7 +36,7 @@ public class AlbumClient {
         StringBuilder result = new StringBuilder();
         String line = "";
         while ((line = rd.readLine()) != null) {
-            result.append(line);
+            result.append(line).append("\r\n");
         }
         System.out.println(result.toString());
     }
@@ -53,7 +53,7 @@ public class AlbumClient {
         StringBuilder result = new StringBuilder();
         String line = "";
         while ((line = rd.readLine()) != null) {
-            result.append(line);
+            result.append(line).append("\r\n");
         }
         System.out.println(result.toString());
     }
@@ -79,7 +79,7 @@ public class AlbumClient {
         StringBuilder result = new StringBuilder();
         String line = "";
         while ((line = rd.readLine()) != null) {
-            result.append(line);
+            result.append(line).append("\r\n");
         }
         System.out.println(result.toString());
 

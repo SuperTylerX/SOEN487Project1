@@ -81,6 +81,12 @@ public class ArtistController extends HttpServlet {
         String lastname = postInfoMap.get("lastname");
         String bio = postInfoMap.get("bio");
 
+        if (nickname == null || firstName == null || lastname == null || bio == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            pw.println("Missing parameters");
+            return;
+        }
+
         Artist artist = new Artist(nickname, firstName, lastname, bio);
         boolean flag = manager.updateArtist(artist);
         if (flag) {
@@ -95,6 +101,10 @@ public class ArtistController extends HttpServlet {
         PrintWriter pw = response.getWriter();
         RepositoryManager manager = RepositoryManagerImpl.getInstance();
         String nickname = request.getParameter("nickname");
+        if (nickname == null || nickname.isEmpty()){
+            pw.println("Missing params");
+            return;
+        }
         boolean flag = manager.removeArtist(nickname);
         if (flag) {
             pw.println("Artist deleted successfully!");

@@ -64,13 +64,13 @@ public class Artist {
                 ", firstName='" + firstName + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", bio='" + bio + '\'' +
-                '}' + "\r\n";
+                '}';
     }
 
     public String printName() {
         return "Artist{ nickname = '" + nickname + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", lastname='" + lastname + '\'' + "}\r\n";
+                ", lastname='" + lastname + "'}";
     }
 
 }

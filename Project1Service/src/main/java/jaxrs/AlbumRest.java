@@ -17,7 +17,7 @@ public class AlbumRest {
     @Produces(MediaType.TEXT_PLAIN)
     public String getAlbums() {
         RepositoryManager manager = RepositoryManagerImpl.getInstance();
-        return manager.getAlbums().stream().map(Album::printTitle).collect(Collectors.joining("\\r\\n"));
+        return manager.getAlbums().stream().map(Album::printTitle).collect(Collectors.joining("\r\n"));
     }
 
 
@@ -40,6 +40,10 @@ public class AlbumRest {
     public String addAlbum(@FormParam("isrc") String ISRC, @FormParam("title") String title,
                            @FormParam("description") String description, @FormParam("year") int year,
                            @FormParam("artist") String artist) {
+
+        if (ISRC == null || ISRC.isEmpty() || title == null || title.isEmpty() || year == 0 || artist == null || artist.isEmpty()) {
+            return "Missing information";
+        }
         Album newAlbum = new Album(ISRC, title, description, year, artist);
         RepositoryManager manager = RepositoryManagerImpl.getInstance();
         manager.addAlbum(newAlbum);
@@ -53,6 +57,9 @@ public class AlbumRest {
     public String updateAlbum(@FormParam("isrc") String ISRC, @FormParam("title") String title,
                               @FormParam("description") String description, @FormParam("year") int year,
                               @FormParam("artist") String artist) {
+        if (ISRC == null || ISRC.isEmpty() || title == null || title.isEmpty() || year == 0 || artist == null || artist.isEmpty()) {
+            return "Missing information";
+        }
         Album newAlbum = new Album(ISRC, title, description, year, artist);
         RepositoryManager manager = RepositoryManagerImpl.getInstance();
         boolean flag = manager.updateAlbum(newAlbum);
